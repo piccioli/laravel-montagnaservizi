@@ -1,0 +1,4 @@
+-- Montagna Servizi SCPA — Laravel DB seed
+-- Questo file viene eseguito solo alla prima inizializzazione del volume MariaDB.
+-- Lo schema viene creato tramite `php artisan migrate`.
+-- I dati iniziali vengono caricati tramite `php artisan db:seed`.
