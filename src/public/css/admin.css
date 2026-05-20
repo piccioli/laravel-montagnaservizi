@@ -255,3 +255,31 @@
     transition: transform .2s;
 }
 .ms-toggle input:checked + .ms-toggle__track::after { transform: translateX(16px); }
+
+/* Dashboard stat cards */
+.ms-admin-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+    margin-bottom: 1.5rem;
+}
+.ms-admin-stat-card {
+    background: var(--ms-white);
+    border-radius: var(--ms-radius);
+    box-shadow: var(--ms-shadow);
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+.ms-admin-stat-icon { font-size: 1.75rem; flex-shrink: 0; }
+.ms-admin-stat-label { font-size: .8125rem; color: var(--ms-muted); margin-bottom: .125rem; }
+.ms-admin-stat-value { font-size: 1.375rem; font-weight: 700; font-family: var(--ms-font-heading); color: var(--ms-dark); }
+
+/* Form error */
+.ms-field-error { font-size: .8125rem; color: #dc2626; margin-top: .375rem; }
+
+@media (max-width: 900px) {
+    .ms-admin-stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .ms-admin-layout { grid-template-columns: 1fr; }
+}
