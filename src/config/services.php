@@ -28,11 +28,22 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
-    'slack' => [
-        'notifications' => [
-            'bot_user_oauth_token' => env('SLACK_BOT_USER_OAUTH_TOKEN'),
-            'channel' => env('SLACK_BOT_USER_DEFAULT_CHANNEL'),
-        ],
+    'typeform' => [
+        'form_id'  => env('TYPEFORM_FORM_ID', 'PLACEHOLDER'),
+        'base_url' => env('TYPEFORM_BASE_URL', 'https://form.typeform.com/to'),
+        'url'      => rtrim(env('TYPEFORM_BASE_URL', 'https://form.typeform.com/to'), '/') . '/' . env('TYPEFORM_FORM_ID', 'PLACEHOLDER'),
     ],
+
+    'gtm' => [
+        'container_id' => env('GTM_CONTAINER_ID'),
+    ],
+
+    'brevo' => [
+        'embed_code' => env('BREVO_EMBED_CODE'),
+        'api_key'    => env('BREVO_API_KEY'),
+        'list_id'    => env('BREVO_LIST_ID'),
+    ],
+
+    'cookie_banner_enabled' => env('COOKIE_BANNER_ENABLED', true),
 
 ];

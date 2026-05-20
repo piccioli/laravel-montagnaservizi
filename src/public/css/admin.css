@@ -1,0 +1,257 @@
+/* ============================================================
+   Montagna Servizi — Admin Panel CSS
+   ============================================================ */
+
+.ms-admin-body { background: #f1f5f9; }
+
+.ms-admin-layout {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    min-height: 100vh;
+}
+
+/* Sidebar */
+.ms-admin-sidebar {
+    background: var(--ms-green-dark);
+    color: rgba(255,255,255,.8);
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+}
+.ms-admin-sidebar__brand {
+    padding: 1.5rem 1.25rem 1rem;
+    border-bottom: 1px solid rgba(255,255,255,.1);
+    margin-bottom: .75rem;
+}
+.ms-admin-sidebar__brand-text {
+    display: block;
+    font-family: var(--ms-font-heading);
+    font-weight: 700;
+    font-size: .9375rem;
+    color: var(--ms-white);
+}
+.ms-admin-sidebar__brand-sub {
+    font-size: .75rem;
+    color: rgba(255,255,255,.5);
+    letter-spacing: .05em;
+}
+
+.ms-admin-nav { padding: .5rem 0; flex: 1; }
+.ms-admin-nav a {
+    display: block;
+    padding: .625rem 1.25rem;
+    font-size: .9rem;
+    color: rgba(255,255,255,.7);
+    text-decoration: none;
+    border-left: 3px solid transparent;
+    transition: background .15s, color .15s, border-color .15s;
+}
+.ms-admin-nav a:hover  { background: rgba(255,255,255,.07); color: var(--ms-white); }
+.ms-admin-nav a.active { background: rgba(255,255,255,.1); color: var(--ms-white); border-left-color: rgba(255,255,255,.6); }
+
+.ms-admin-sidebar__foot {
+    padding: 1rem 1.25rem 1.5rem;
+    border-top: 1px solid rgba(255,255,255,.1);
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+.ms-admin-sidebar__view-site {
+    font-size: .8125rem;
+    color: rgba(255,255,255,.55);
+    text-decoration: none;
+}
+.ms-admin-sidebar__view-site:hover { color: var(--ms-white); }
+.ms-admin-sidebar__logout {
+    background: none;
+    border: none;
+    color: rgba(255,255,255,.5);
+    font-size: .8125rem;
+    cursor: pointer;
+    padding: 0;
+    text-align: left;
+}
+.ms-admin-sidebar__logout:hover { color: var(--ms-white); }
+
+/* Main area */
+.ms-admin-main { display: flex; flex-direction: column; min-width: 0; }
+
+.ms-admin-topbar {
+    background: var(--ms-white);
+    border-bottom: 1px solid var(--ms-border);
+    padding: 1rem 1.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+.ms-admin-topbar__title { font-size: 1.0625rem; font-weight: 600; }
+.ms-admin-topbar__actions { display: flex; gap: .75rem; }
+
+.ms-admin-content { padding: 1.75rem; flex: 1; }
+
+/* Alerts */
+.ms-admin-alert {
+    padding: .875rem 1.25rem;
+    border-radius: var(--ms-radius);
+    margin: 1rem 1.75rem 0;
+    font-size: .9rem;
+}
+.ms-admin-alert--success { background: #dcfce7; color: #166534; border: 1px solid #bbf7d0; }
+.ms-admin-alert--error   { background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
+
+/* Tables */
+.ms-admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--ms-white);
+    border-radius: var(--ms-radius);
+    overflow: hidden;
+    box-shadow: var(--ms-shadow);
+    font-size: .9rem;
+}
+.ms-admin-table th {
+    background: #f8fafc;
+    padding: .75rem 1rem;
+    text-align: left;
+    font-size: .75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: var(--ms-muted);
+    border-bottom: 1px solid var(--ms-border);
+}
+.ms-admin-table td {
+    padding: .75rem 1rem;
+    border-bottom: 1px solid var(--ms-border);
+    vertical-align: middle;
+}
+.ms-admin-table tr:last-child td { border-bottom: none; }
+.ms-admin-table tr:hover td { background: #f8fafc; }
+
+/* Badges */
+.ms-badge {
+    display: inline-block;
+    padding: .2rem .6rem;
+    border-radius: 9999px;
+    font-size: .6875rem;
+    font-weight: 600;
+    letter-spacing: .04em;
+}
+.ms-badge--green  { background: #dcfce7; color: #166534; }
+.ms-badge--gray   { background: #f1f5f9; color: #64748b; }
+.ms-badge--yellow { background: #fef9c3; color: #854d0e; }
+
+/* Forms */
+.ms-admin-form { max-width: 680px; }
+.ms-admin-form-wide { max-width: 900px; }
+.ms-field { margin-bottom: 1.25rem; }
+.ms-field label {
+    display: block;
+    font-size: .875rem;
+    font-weight: 500;
+    margin-bottom: .375rem;
+    color: var(--ms-dark);
+}
+.ms-field input[type="text"],
+.ms-field input[type="email"],
+.ms-field input[type="password"],
+.ms-field input[type="datetime-local"],
+.ms-field input[type="number"],
+.ms-field input[type="file"],
+.ms-field select,
+.ms-field textarea {
+    width: 100%;
+    padding: .625rem .875rem;
+    border: 1px solid var(--ms-border);
+    border-radius: var(--ms-radius);
+    font-size: .9375rem;
+    font-family: var(--ms-font-body);
+    background: var(--ms-white);
+    color: var(--ms-dark);
+    transition: border-color .2s, box-shadow .2s;
+}
+.ms-field input:focus,
+.ms-field select:focus,
+.ms-field textarea:focus {
+    outline: none;
+    border-color: var(--ms-green);
+    box-shadow: 0 0 0 3px rgba(45,107,88,.15);
+}
+.ms-field textarea { min-height: 200px; resize: vertical; }
+.ms-field__hint { font-size: .8125rem; color: var(--ms-muted); margin-top: .375rem; }
+.ms-field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+/* Card container */
+.ms-admin-card {
+    background: var(--ms-white);
+    border-radius: var(--ms-radius);
+    box-shadow: var(--ms-shadow);
+    padding: 1.5rem;
+}
+
+/* Thumbnail in tabella */
+.ms-admin-thumb {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: var(--ms-green-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ms-green);
+    font-size: 1.25rem;
+    font-family: var(--ms-font-heading);
+    font-weight: 600;
+}
+.ms-admin-thumb img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
+
+/* Actions in tabella */
+.ms-admin-actions { display: flex; gap: .5rem; }
+.ms-admin-actions a,
+.ms-admin-actions button {
+    font-size: .8125rem;
+    padding: .3rem .7rem;
+    border-radius: 4px;
+    border: 1px solid var(--ms-border);
+    background: var(--ms-white);
+    cursor: pointer;
+    text-decoration: none;
+    color: var(--ms-dark);
+    font-family: var(--ms-font-body);
+    transition: background .15s;
+}
+.ms-admin-actions a:hover,
+.ms-admin-actions button:hover { background: var(--ms-gray); }
+.ms-admin-actions .delete { color: #dc2626; border-color: #fecaca; }
+.ms-admin-actions .delete:hover { background: #fef2f2; }
+
+/* Toggle / checkbox switch */
+.ms-toggle { display: flex; align-items: center; gap: .5rem; cursor: pointer; }
+.ms-toggle input { display: none; }
+.ms-toggle__track {
+    width: 36px;
+    height: 20px;
+    background: var(--ms-border);
+    border-radius: 9999px;
+    position: relative;
+    transition: background .2s;
+}
+.ms-toggle input:checked + .ms-toggle__track { background: var(--ms-green); }
+.ms-toggle__track::after {
+    content: '';
+    position: absolute;
+    top: 2px; left: 2px;
+    width: 16px; height: 16px;
+    background: var(--ms-white);
+    border-radius: 50%;
+    transition: transform .2s;
+}
+.ms-toggle input:checked + .ms-toggle__track::after { transform: translateX(16px); }
