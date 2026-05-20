@@ -792,3 +792,135 @@ p:last-child { margin-bottom: 0; }
 .ms-service-list-item:hover { box-shadow: var(--ms-shadow); }
 .ms-service-list-item h3 { font-size: 1.0625rem; margin-bottom: .375rem; }
 .ms-service-list-item p  { font-size: .9rem; color: var(--ms-muted); margin-bottom: .75rem; }
+
+/* ============================================================
+   Filter bar (news archive)
+   ============================================================ */
+.ms-filter-bar-wrap {
+  background: var(--ms-white);
+  border-bottom: 1px solid var(--ms-border);
+  padding-block: .75rem;
+}
+.ms-filter-bar {
+  display: flex;
+  gap: .5rem;
+  flex-wrap: wrap;
+}
+.ms-filter-chip {
+  display: inline-block;
+  padding: .375rem .9rem;
+  border-radius: 9999px;
+  font-family: var(--ms-font-heading);
+  font-size: .8125rem;
+  font-weight: 500;
+  color: var(--ms-muted);
+  background: var(--ms-gray);
+  border: 1px solid transparent;
+  text-decoration: none;
+  transition: background .15s, color .15s, border-color .15s;
+}
+.ms-filter-chip:hover { background: var(--ms-green-light); color: var(--ms-green); }
+.ms-filter-chip.active {
+  background: var(--ms-green);
+  color: var(--ms-white);
+  border-color: var(--ms-green);
+}
+
+/* ============================================================
+   Articolo singolo
+   ============================================================ */
+.ms-article-meta-top {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: .875rem;
+}
+.ms-article-date { font-size: .875rem; color: rgba(255,255,255,.6); }
+
+.ms-article-cover { margin-block: -1rem 0; }
+.ms-article-cover__img {
+  width: 100%;
+  max-height: 480px;
+  object-fit: cover;
+  border-radius: var(--ms-radius);
+  display: block;
+}
+
+.ms-article-layout {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 3rem;
+  align-items: start;
+}
+
+/* Prose — corpo articolo / servizio */
+.ms-prose { font-size: .9375rem; line-height: 1.75; color: #374151; }
+.ms-prose h2 { font-size: 1.25rem; margin-top: 2rem; margin-bottom: .625rem; color: var(--ms-dark); }
+.ms-prose h3 { font-size: 1.0625rem; margin-top: 1.5rem; margin-bottom: .5rem; color: var(--ms-dark); }
+.ms-prose p  { margin-bottom: 1rem; }
+.ms-prose ul,
+.ms-prose ol { padding-left: 1.25rem; margin-bottom: 1rem; }
+.ms-prose li { margin-bottom: .375rem; }
+.ms-prose a  { color: var(--ms-green); }
+.ms-prose a:hover { text-decoration: none; }
+.ms-prose strong { color: var(--ms-dark); }
+.ms-prose blockquote {
+  border-left: 3px solid var(--ms-green);
+  padding-left: 1rem;
+  margin: 1.5rem 0;
+  color: var(--ms-muted);
+  font-style: italic;
+}
+.ms-prose img {
+  max-width: 100%;
+  border-radius: var(--ms-radius);
+  margin-block: 1rem;
+}
+
+.ms-article-share { margin-bottom: 1.5rem; }
+.ms-article-share__label {
+  font-size: .75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  color: var(--ms-muted);
+  margin-bottom: .625rem;
+}
+.ms-article-share__links { display: flex; flex-direction: column; gap: .5rem; }
+.ms-share-btn {
+  display: block;
+  text-align: center;
+  padding: .5rem 1rem;
+  border-radius: var(--ms-radius);
+  font-family: var(--ms-font-heading);
+  font-size: .875rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: opacity .15s;
+}
+.ms-share-btn:hover { opacity: .85; }
+.ms-share-btn--linkedin { background: #0a66c2; color: var(--ms-white); }
+.ms-share-btn--facebook { background: #1877f2; color: var(--ms-white); }
+
+.ms-article-nav { margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid var(--ms-border); }
+
+/* Sidebar service — badge categoria */
+.ms-service-sidebar-box__cat {
+  font-size: .6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  color: var(--ms-green);
+  margin-bottom: .625rem;
+}
+
+/* ============================================================
+   Responsive — Step 4
+   ============================================================ */
+@media (max-width: 960px) {
+  .ms-article-layout { grid-template-columns: 1fr; }
+  .ms-article-sidebar { order: -1; }
+}
+@media (max-width: 520px) {
+  .ms-article-cover__img { border-radius: 0; }
+}
