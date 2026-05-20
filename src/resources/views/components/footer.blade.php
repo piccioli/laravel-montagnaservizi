@@ -36,17 +36,40 @@
                 <p class="ms-footer__newsletter-note">
                     Aggiornamenti e comunicazioni per le Sezioni CAI ogni due settimane.
                 </p>
-                @if(config('services.brevo.embed_code'))
-                    {!! config('services.brevo.embed_code') !!}
-                @else
-                    <div class="ms-newsletter-placeholder">
-                        <p>Form iscrizione newsletter — integrazione Brevo configurata in Fase 6.</p>
+                <div x-data="newsletterForm()" x-cloak>
+                    <form @submit.prevent="submit" x-show="!success">
                         <div class="ms-newsletter-form">
-                            <input type="email" placeholder="La tua email" disabled>
-                            <button class="ms-btn ms-btn--primary" disabled>Iscriviti</button>
+                            <input type="email"
+                                   x-model="email"
+                                   placeholder="La tua email"
+                                   :disabled="loading"
+                                   required
+                                   autocomplete="email">
+                            <button type="submit"
+                                    class="ms-btn ms-btn--primary ms-btn--sm"
+                                    :disabled="loading">
+                                <span x-text="loading ? 'Invio…' : 'Iscriviti'">Iscriviti</span>
+                            </button>
                         </div>
-                    </div>
-                @endif
+                        <p x-show="error"
+                           x-text="error"
+                           class="ms-newsletter-msg ms-newsletter-msg--error"
+                           style="display:none"></p>
+                    </form>
+                    <p x-show="success"
+                       class="ms-newsletter-msg ms-newsletter-msg--success"
+                       style="display:none">
+                        Iscritto con successo! Controlla la tua email.
+                    </p>
+                </div>
+                {{-- Fallback statico per no-JS --}}
+                <noscript>
+                    <form method="POST" action="/newsletter/subscribe" class="ms-newsletter-form">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        <input type="email" name="email" placeholder="La tua email" required autocomplete="email">
+                        <button type="submit" class="ms-btn ms-btn--primary ms-btn--sm">Iscriviti</button>
+                    </form>
+                </noscript>
             </div>
 
         </div>

@@ -7,6 +7,7 @@
 
     <title>@yield('title', 'Montagna Servizi SCPA') — Servizi per le Sezioni CAI</title>
     <meta name="description" content="@yield('description', 'Montagna Servizi SCPA offre servizi di segreteria, comunicazione, contabilità e consulenza alle Sezioni e ai Gruppi Regionali del Club Alpino Italiano.')">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     {{-- Open Graph --}}
     <meta property="og:title"       content="@yield('title', 'Montagna Servizi SCPA')">
@@ -28,24 +29,38 @@
     {{-- Design system --}}
     <link rel="stylesheet" href="/css/app.css">
 
-    {{-- Google Tag Manager (head) --}}
+    {{-- dataLayer always initialized (consent mode compatible) --}}
+    <script>window.dataLayer = window.dataLayer || [];</script>
+
+    {{-- GTM: loaded lazily only after cookie consent --}}
     @if(config('services.gtm.container_id'))
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','{{ config('services.gtm.container_id') }}');</script>
+    <script>
+    (function () {
+        var GTM_ID = '{{ config('services.gtm.container_id') }}';
+        window._loadGtm = function () {
+            if (window._gtmLoaded || !GTM_ID) return;
+            window._gtmLoaded = true;
+            (function (w, d, s, l, i) {
+                w[l] = w[l] || [];
+                w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+                var f = d.getElementsByTagName(s)[0],
+                    j = d.createElement(s),
+                    dl = l !== 'dataLayer' ? '&l=' + l : '';
+                j.async = true;
+                j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+                f.parentNode.insertBefore(j, f);
+            })(w, d, s, l, i);
+        };
+        if (localStorage.getItem('ms_cookie_consent') === 'all') {
+            window._loadGtm();
+        }
+    })();
+    </script>
     @endif
 
     @stack('head')
 </head>
 <body>
-
-{{-- Google Tag Manager (body) --}}
-@if(config('services.gtm.container_id'))
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ config('services.gtm.container_id') }}"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-@endif
 
 {{-- Skip to content --}}
 <a class="skip-to-content" href="#main-content">Vai al contenuto principale</a>
@@ -96,12 +111,47 @@ function cookieBanner() {
         accept() {
             localStorage.setItem('ms_cookie_consent', 'all');
             this.show = false;
+            if (window._loadGtm) window._loadGtm();
         },
         reject() {
             localStorage.setItem('ms_cookie_consent', 'necessary');
             this.show = false;
         },
-    }
+    };
+}
+
+function newsletterForm() {
+    return {
+        email: '',
+        loading: false,
+        success: false,
+        error: '',
+        async submit() {
+            this.loading = true;
+            this.error = '';
+            try {
+                const res = await fetch('/newsletter/subscribe', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name=csrf-token]').content,
+                        'Accept': 'application/json',
+                    },
+                    body: JSON.stringify({ email: this.email }),
+                });
+                const data = await res.json();
+                if (data.success) {
+                    this.success = true;
+                } else {
+                    this.error = data.message || 'Errore. Riprova.';
+                }
+            } catch (e) {
+                this.error = 'Errore di rete. Riprova.';
+            } finally {
+                this.loading = false;
+            }
+        },
+    };
 }
 </script>
 

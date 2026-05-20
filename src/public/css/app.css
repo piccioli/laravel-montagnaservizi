@@ -591,15 +591,31 @@ p:last-child { margin-bottom: 0; }
 .ms-newsletter-form { display: flex; gap: .75rem; flex-wrap: wrap; }
 .ms-newsletter-form input {
   flex: 1;
-  min-width: 200px;
-  padding: .75rem 1rem;
-  border: 1px solid rgba(255,255,255,.2);
+  min-width: 0;
+  padding: .625rem .875rem;
+  border: 1px solid rgba(255,255,255,.25);
   border-radius: var(--ms-radius);
-  background: rgba(255,255,255,.1);
+  background: rgba(255,255,255,.12);
   color: var(--ms-white);
-  font-size: .9375rem;
+  font-size: .9rem;
+  font-family: var(--ms-font-body);
+  transition: border-color .2s;
 }
-.ms-newsletter-form input::placeholder { color: rgba(255,255,255,.45); }
+.ms-newsletter-form input:focus {
+  outline: none;
+  border-color: rgba(255,255,255,.6);
+}
+.ms-newsletter-form input::placeholder { color: rgba(255,255,255,.4); }
+.ms-newsletter-form input:disabled { opacity: .5; cursor: not-allowed; }
+.ms-newsletter-msg {
+  margin-top: .625rem;
+  font-size: .8125rem;
+  border-radius: 4px;
+  padding: .375rem .625rem;
+}
+.ms-newsletter-msg--success { background: rgba(255,255,255,.12); color: rgba(255,255,255,.9); }
+.ms-newsletter-msg--error   { background: rgba(220,38,38,.2);    color: #fca5a5; }
+.ms-footer__newsletter-note { font-size: .875rem; color: rgba(255,255,255,.6); margin-bottom: .875rem; }
 
 /* ============================================================
    Cookie banner
