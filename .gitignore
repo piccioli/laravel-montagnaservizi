@@ -12,6 +12,7 @@ WORDPRESS/
 .env.*
 !.env.example
 !.env.uat.example
+!.env.prod.example
 /vendor/
 /node_modules/
 /public/storage
@@ -28,8 +29,9 @@ composer.phar
 .DS_Store
 **/.DS_Store
 
-# UAT — htpasswd contiene credenziali, non committare
+# htpasswd contiene credenziali, non committare
 docker-uat/nginx/.htpasswd
+docker-prod/nginx/.htpasswd
 
 # Editor
 .idea/
