@@ -29,6 +29,9 @@ composer.phar
 .DS_Store
 **/.DS_Store
 
+# Credenziali generate in fase di bootstrap UAT
+.uat-credentials.txt
+
 # htpasswd contiene credenziali, non committare
 docker-uat/nginx/.htpasswd
 docker-prod/nginx/.htpasswd

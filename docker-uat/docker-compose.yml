@@ -11,14 +11,9 @@ services:
       - storage:/var/www/html/storage/app/public
     depends_on:
       - app
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.ms-uat.rule=Host(`uat.montagnaservizi.com`)"
-      - "traefik.http.routers.ms-uat.entrypoints=websecure"
-      - "traefik.http.routers.ms-uat.tls.certresolver=letsencrypt"
-      - "traefik.http.services.ms-uat.loadbalancer.server.port=80"
+    container_name: ms-uat-nginx
     networks:
-      - web
+      - infra
       - internal
 
   # ── PHP-FPM ─────────────────────────────────────────────────────
@@ -61,7 +56,9 @@ volumes:
   storage:
 
 networks:
-  web:
-    external: true   # gestita da docker-traefik
+  # Rete condivisa con montagnaservizi-infra (nginx edge su :80/:443)
+  infra:
+    external: true
+    name: montagnaservizi-infra_internal
   internal:
     driver: bridge
