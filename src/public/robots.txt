@@ -1,2 +1,4 @@
+# robots.txt — Montagna Servizi SCPA
+# UAT: disallow tutto. Rimuovere il Disallow per la produzione.
 User-agent: *
-Disallow:
+Disallow: /

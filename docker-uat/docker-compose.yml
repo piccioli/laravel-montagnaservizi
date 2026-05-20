@@ -1,0 +1,95 @@
+services:
+
+  # ── Reverse proxy + SSL termination ────────────────────────────
+  traefik:
+    image: traefik:v3
+    restart: unless-stopped
+    command:
+      - --providers.docker=true
+      - --providers.docker.exposedbydefault=false
+      - --entrypoints.web.address=:80
+      - --entrypoints.websecure.address=:443
+      # HTTP → HTTPS redirect
+      - --entrypoints.web.http.redirections.entrypoint.to=websecure
+      - --entrypoints.web.http.redirections.entrypoint.scheme=https
+      - --entrypoints.web.http.redirections.entrypoint.permanent=true
+      # Let's Encrypt
+      - --certificatesresolvers.letsencrypt.acme.email=info@montagnaservizi.com
+      - --certificatesresolvers.letsencrypt.acme.storage=/letsencrypt/acme.json
+      - --certificatesresolvers.letsencrypt.acme.tlschallenge=true
+      - --log.level=WARN
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - letsencrypt:/letsencrypt
+    networks:
+      - web
+
+  # ── Web server ──────────────────────────────────────────────────
+  nginx:
+    image: nginx:alpine
+    restart: unless-stopped
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./nginx/.htpasswd:/etc/nginx/.htpasswd:ro
+      - ../src:/var/www/html:ro
+      - storage:/var/www/html/storage/app/public
+    depends_on:
+      - app
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.ms-uat.rule=Host(`uat.montagnaservizi.com`)"
+      - "traefik.http.routers.ms-uat.entrypoints=websecure"
+      - "traefik.http.routers.ms-uat.tls.certresolver=letsencrypt"
+      - "traefik.http.services.ms-uat.loadbalancer.server.port=80"
+    networks:
+      - web
+      - internal
+
+  # ── PHP-FPM ─────────────────────────────────────────────────────
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    volumes:
+      - ../src:/var/www/html
+      - storage:/var/www/html/storage/app/public
+    env_file: ../.env.uat
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - internal
+
+  # ── Database ────────────────────────────────────────────────────
+  db:
+    image: mariadb:11
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE:-ms_laravel}
+      MYSQL_USER: ${DB_USERNAME:-ms_user}
+      MYSQL_PASSWORD: ${DB_PASSWORD:?DB_PASSWORD required}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:?DB_ROOT_PASSWORD required}
+    volumes:
+      - db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - internal
+
+volumes:
+  db_data:
+  letsencrypt:
+  storage:
+
+networks:
+  web:
+    external: true     # rete condivisa con Traefik (docker network create web)
+  internal:
+    driver: bridge
