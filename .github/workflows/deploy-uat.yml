@@ -37,4 +37,6 @@ jobs:
             --max-time 30 \
             https://uat.montagnaservizi.com)
           echo "HTTP status: $STATUS"
-          [ "$STATUS" = "200" ] || (echo "Smoke test FAILED (status $STATUS)" && exit 1)
+          # 200 = ok, 401 = basic auth attivo (UAT protetto — server up)
+          [[ "$STATUS" == "200" || "$STATUS" == "401" ]] \
+            || (echo "Smoke test FAILED (status $STATUS)" && exit 1)
