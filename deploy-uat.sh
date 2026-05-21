@@ -65,6 +65,11 @@ docker compose -f "$DOCKER_DIR/docker-compose.yml" --env-file "$ENV_FILE" \
 docker compose -f "$DOCKER_DIR/docker-compose.yml" --env-file "$ENV_FILE" \
     exec app php artisan view:cache
 
+# ── Permessi storage (www-data deve poter scrivere) ──────────
+step "Fix permessi storage e cache..."
+docker compose -f "$DOCKER_DIR/docker-compose.yml" --env-file "$ENV_FILE" \
+    exec app chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+
 # ── Restart PHP-FPM ─────────────────────────────────────────
 step "Restart app container..."
 docker compose -f "$DOCKER_DIR/docker-compose.yml" --env-file "$ENV_FILE" \
