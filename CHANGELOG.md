@@ -10,6 +10,9 @@ Il versionamento segue [Semantic Versioning](https://semver.org/lang/it/):
 
 ## [Unreleased]
 
+### Changed
+- `deploy-uat.sh`: sostituito `migrate --force` con `migrate:fresh --force` + `db:seed --force` — il DB UAT viene azzerato e riseminato ad ogni deploy con dati demo (40 news + servizi + team + governance + utente admin)
+
 ---
 
 ## [0.5.1] — 2026-05-21
