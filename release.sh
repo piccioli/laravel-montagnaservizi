@@ -55,32 +55,27 @@ step "VERSION aggiornato → $NEW_VERSION"
 PREV_TAG="v${CURRENT}"
 NEW_TAG="v${NEW_VERSION}"
 
-python3 - <<PYEOF
-import re, pathlib
+python3 - "$NEW_VERSION" "$TODAY" "$PREV_TAG" "$NEW_TAG" "$CHANGELOG_FILE" "$REPO_URL" <<'PYEOF'
+import sys, pathlib
 
-path = pathlib.Path("$CHANGELOG_FILE")
+new_version, today, prev_tag, new_tag, changelog_file, repo_url = sys.argv[1:]
+path = pathlib.Path(changelog_file)
 content = path.read_text()
 
-# Sostituisce "## [Unreleased]" con versione + data
 content = content.replace(
     "## [Unreleased]\n",
-    f"## [Unreleased]\n\n---\n\n## [{NEW_VERSION}] — {TODAY}\n"
+    f"## [Unreleased]\n\n---\n\n## [{new_version}] — {today}\n"
 )
 
-# Aggiorna link in fondo
-old_unreleased = f"[Unreleased]: {REPO_URL}/compare/{PREV_TAG}...HEAD"
-new_unreleased = f"[Unreleased]: {REPO_URL}/compare/{NEW_TAG}...HEAD"
-new_link = f"[{NEW_VERSION}]: {REPO_URL}/compare/{PREV_TAG}...{NEW_TAG}"
+old_unreleased = f"[Unreleased]: {repo_url}/compare/{prev_tag}...HEAD"
+new_unreleased = f"[Unreleased]: {repo_url}/compare/{new_tag}...HEAD"
+new_link = f"[{new_version}]: {repo_url}/compare/{prev_tag}...{new_tag}"
 
 if old_unreleased in content:
-    content = content.replace(
-        old_unreleased,
-        f"{new_unreleased}\n{new_link}"
-    )
+    content = content.replace(old_unreleased, f"{new_unreleased}\n{new_link}")
 else:
-    # Primo utilizzo: aggiungi i link
-    content += f"\n[Unreleased]: {REPO_URL}/compare/{NEW_TAG}...HEAD\n"
-    content += f"[{NEW_VERSION}]: {REPO_URL}/compare/{PREV_TAG}...{NEW_TAG}\n"
+    content += f"\n[Unreleased]: {repo_url}/compare/{new_tag}...HEAD\n"
+    content += f"[{new_version}]: {repo_url}/compare/{prev_tag}...{new_tag}\n"
 
 path.write_text(content)
 print("CHANGELOG aggiornato")
