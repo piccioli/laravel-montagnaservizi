@@ -27,8 +27,8 @@ warn() { echo -e "${YELLOW}[warn]${NC} $1"; }
     exit 1; }
 
 # ── Pull codice ──────────────────────────────────────────────
-step "Pulling codice da origin/main..."
-git -C "$PROJECT_ROOT" pull origin main
+step "Pulling codice da origin/develop..."
+git -C "$PROJECT_ROOT" pull origin develop
 
 # ── Build immagine app (solo se Dockerfile cambiato) ─────────
 step "Build immagine PHP-FPM..."
