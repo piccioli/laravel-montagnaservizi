@@ -6,6 +6,12 @@
 @section('content')
 
 <section class="ms-hero ms-hero--inner">
+    <img src="{{ Storage::url('hero/hero-servizi.webp') }}"
+         alt="Sentiero alpino — i servizi di Montagna Servizi per le Sezioni CAI"
+         class="ms-hero__bg-img"
+         width="1440" height="500"
+         loading="eager"
+         role="presentation">
     <div class="l-container">
         <div class="ms-hero__inner">
             <span class="ms-hero__eyebrow"><a href="/servizi" style="color:inherit;opacity:.7;">Servizi</a> &rsaquo; Comunicazione</span>

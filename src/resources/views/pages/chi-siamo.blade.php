@@ -7,6 +7,12 @@
 
 {{-- Hero compatto --}}
 <section class="ms-hero ms-hero--inner">
+    <img src="{{ Storage::url('hero/hero-chi-siamo.webp') }}"
+         alt="Escursionisti in cammino su sentiero alpino"
+         class="ms-hero__bg-img"
+         width="1440" height="500"
+         loading="eager"
+         role="presentation">
     <div class="l-container">
         <div class="ms-hero__inner">
             <span class="ms-hero__eyebrow">Chi siamo</span>

@@ -6,6 +6,12 @@
 @section('content')
 
 <section class="ms-hero ms-hero--inner">
+    <img src="{{ Storage::url('hero/hero-news.webp') }}"
+         alt="Pascoli alpini verso il Lago di Como"
+         class="ms-hero__bg-img"
+         width="1440" height="500"
+         loading="eager"
+         role="presentation">
     <div class="l-container">
         <div class="ms-hero__inner">
             <span class="ms-hero__eyebrow">News e aggiornamenti</span>

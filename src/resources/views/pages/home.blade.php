@@ -6,7 +6,13 @@
 @section('content')
 
 {{-- Hero --}}
-<section class="ms-hero">
+<section class="ms-hero ms-hero--photo">
+    <img src="{{ Storage::url('hero/hero-home.webp') }}"
+         alt="Lago alpino in Valsavarenche — paesaggio del Sentiero Italia CAI"
+         class="ms-hero__bg-img"
+         width="1920" height="1080"
+         loading="eager" fetchpriority="high"
+         role="presentation">
     <div class="l-container">
         <div class="ms-hero__inner">
             <span class="ms-hero__eyebrow">Servizi per le Sezioni CAI</span>
