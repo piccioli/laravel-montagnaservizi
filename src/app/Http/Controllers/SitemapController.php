@@ -17,8 +17,9 @@ class SitemapController extends Controller
             ->orderBy('sort_order')
             ->get(['category_slug', 'slug', 'updated_at']);
 
-        return response()
-            ->view('sitemap', compact('articles', 'services'))
+        $content = view('sitemap', compact('articles', 'services'))->render();
+
+        return response('<?xml version="1.0" encoding="UTF-8"?>' . "\n" . $content)
             ->header('Content-Type', 'application/xml; charset=utf-8');
     }
 }
