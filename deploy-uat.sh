@@ -35,6 +35,11 @@ step "Build immagine PHP-FPM..."
 docker compose -f "$DOCKER_DIR/docker-compose.yml" --env-file "$ENV_FILE" \
     build --pull app
 
+# ── Avvio stack (idempotente — necessario dopo reboot) ───────
+step "Stack up..."
+docker compose -f "$DOCKER_DIR/docker-compose.yml" --env-file "$ENV_FILE" \
+    up -d --remove-orphans
+
 # ── Dipendenze PHP (no-dev) ──────────────────────────────────
 step "Installing PHP dependencies (--no-dev)..."
 docker compose -f "$DOCKER_DIR/docker-compose.yml" --env-file "$ENV_FILE" \

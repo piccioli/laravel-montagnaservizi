@@ -1,0 +1,40 @@
+name: Deploy UAT
+
+on:
+  push:
+    branches: [develop]
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: uat
+
+    steps:
+      - name: Deploy to UAT via SSH
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.UAT_HOST }}
+          username: ${{ secrets.UAT_USER }}
+          key: ${{ secrets.UAT_SSH_KEY }}
+          script: |
+            cd ${{ secrets.UAT_PROJECT_PATH }}
+            ./deploy-uat.sh
+
+  smoke-test:
+    needs: deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Wait for stack to settle
+        run: sleep 15
+
+      - name: HTTP smoke test
+        run: |
+          STATUS=$(curl -o /dev/null -s -w "%{http_code}" \
+            --max-time 30 \
+            https://uat.montagnaservizi.com)
+          echo "HTTP status: $STATUS"
+          [ "$STATUS" = "200" ] || (echo "Smoke test FAILED (status $STATUS)" && exit 1)
