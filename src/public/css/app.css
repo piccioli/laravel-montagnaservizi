@@ -319,6 +319,7 @@ p:last-child { margin-bottom: 0; }
 .ms-footer__sub a { color: rgba(255,255,255,.5); text-decoration: none; }
 .ms-footer__sub a:hover { color: var(--ms-white); }
 .ms-footer__legal { display: flex; gap: 1.25rem; flex-wrap: wrap; }
+.ms-footer__version { margin-left: .5rem; opacity: .45; font-size: .75rem; font-family: monospace; }
 
 /* ============================================================
    Hero

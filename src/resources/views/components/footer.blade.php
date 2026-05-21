@@ -76,7 +76,10 @@
 
         {{-- Subfooter --}}
         <div class="ms-footer__sub">
-            <span>&copy; {{ date('Y') }} Montagna Servizi SCPA — Tutti i diritti riservati</span>
+            <span>
+                &copy; {{ date('Y') }} Montagna Servizi SCPA — Tutti i diritti riservati
+                <span class="ms-footer__version">v{{ config('app.version') }}</span>
+            </span>
             <div class="ms-footer__legal">
                 <a href="/privacy-policy">Privacy Policy</a>
                 <a href="/cookie-policy">Cookie Policy</a>
