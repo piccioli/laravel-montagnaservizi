@@ -12,6 +12,7 @@ class DatabaseSeeder extends Seeder
             AdminUserSeeder::class,
             NewsCategorySeeder::class,
             NewsSeeder::class,
+            NewsDemoSeeder::class,
             ServiceSeeder::class,
             TeamMemberSeeder::class,
             GovernanceMemberSeeder::class,
