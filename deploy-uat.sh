@@ -46,10 +46,14 @@ docker compose -f "$DOCKER_DIR/docker-compose.yml" --env-file "$ENV_FILE" \
     run --rm --no-deps app \
     composer install --no-dev --optimize-autoloader --no-interaction --quiet
 
-# ── Migrazioni ───────────────────────────────────────────────
-step "Esecuzione migrazioni..."
+# ── DB reset + seed (UAT — dati demo freschi ad ogni deploy) ─
+step "migrate:fresh — reset completo DB..."
 docker compose -f "$DOCKER_DIR/docker-compose.yml" --env-file "$ENV_FILE" \
-    exec app php artisan migrate --force
+    exec app php artisan migrate:fresh --force
+
+step "Seed dati iniziali..."
+docker compose -f "$DOCKER_DIR/docker-compose.yml" --env-file "$ENV_FILE" \
+    exec app php artisan db:seed --force
 
 # ── Storage symlink ──────────────────────────────────────────
 step "Storage link..."
