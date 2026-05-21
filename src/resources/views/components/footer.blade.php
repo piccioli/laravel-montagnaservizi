@@ -34,7 +34,7 @@
             <div>
                 <div class="ms-footer__col-label">Newsletter</div>
                 <p class="ms-footer__newsletter-note">
-                    Aggiornamenti e comunicazioni per le Sezioni CAI ogni due settimane.
+                    Aggiornamenti sui servizi, novità normative e opportunità per le Sezioni CAI — ogni due settimane.
                 </p>
                 <div x-data="newsletterForm()" x-cloak>
                     <form @submit.prevent="submit" x-show="!success">
