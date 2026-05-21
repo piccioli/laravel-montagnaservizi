@@ -3,7 +3,7 @@
     $currentPath = request()->path();
 @endphp
 
-<div x-data="{ open: false }">
+<div x-data="{ open: false }" style="display:contents">
 
 <header class="ms-header" role="banner">
     <div class="l-container">
