@@ -22,8 +22,8 @@
 @push('structured_data')
 <script type="application/ld+json">
 {
-    "@context": "https://schema.org",
-    "@type": "NewsArticle",
+    "@@context": "https://schema.org",
+    "@@type": "NewsArticle",
     "headline": {{ Js::from($article->title) }},
     "description": {{ Js::from($article->excerpt ?? Str::limit(strip_tags($article->body), 160)) }},
     "url": "{{ url()->current() }}",
@@ -37,7 +37,7 @@
     "dateModified": "{{ $article->updated_at->toIso8601String() }}",
     @endif
     "publisher": {
-        "@type": "Organization",
+        "@@type": "Organization",
         "name": "Montagna Servizi SCPA",
         "url": "{{ config('app.url') }}"
     }

@@ -27,13 +27,13 @@
     {{-- Structured data: Organization --}}
     <script type="application/ld+json">
     {
-        "@context": "https://schema.org",
-        "@type": "Organization",
+        "@@context": "https://schema.org",
+        "@@type": "Organization",
         "name": "Montagna Servizi SCPA",
         "url": "{{ config('app.url') }}",
         "description": "Servizi di segreteria, comunicazione, contabilità e consulenza per le Sezioni e i Gruppi Regionali del Club Alpino Italiano.",
         "address": {
-            "@type": "PostalAddress",
+            "@@type": "PostalAddress",
             "addressCountry": "IT"
         }
     }
