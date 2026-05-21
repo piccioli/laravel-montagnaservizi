@@ -10,16 +10,34 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     {{-- Open Graph --}}
+    <meta property="og:locale"      content="it_IT">
+    <meta property="og:site_name"   content="Montagna Servizi SCPA">
     <meta property="og:title"       content="@yield('title', 'Montagna Servizi SCPA')">
     <meta property="og:description" content="@yield('description', 'Servizi per le Sezioni CAI')">
-    <meta property="og:type"        content="website">
+    <meta property="og:type"        content="@yield('og_type', 'website')">
     <meta property="og:url"         content="{{ url()->current() }}">
     @hasSection('og_image')
     <meta property="og:image"       content="@yield('og_image')">
     @endif
+    @stack('og_extra')
 
     {{-- Canonical --}}
     <link rel="canonical" href="{{ url()->current() }}">
+
+    {{-- Structured data: Organization --}}
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Montagna Servizi SCPA",
+        "url": "{{ config('app.url') }}",
+        "description": "Servizi di segreteria, comunicazione, contabilità e consulenza per le Sezioni e i Gruppi Regionali del Club Alpino Italiano.",
+        "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "IT"
+        }
+    }
+    </script>
 
     {{-- Google Fonts --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -156,5 +174,6 @@ function newsletterForm() {
 </script>
 
 @stack('scripts')
+@stack('structured_data')
 </body>
 </html>

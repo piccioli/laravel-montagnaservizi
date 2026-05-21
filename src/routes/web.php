@@ -6,6 +6,7 @@ use App\Http\Controllers\NewsController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\SitemapController;
 use Illuminate\Support\Facades\Route;
 
 // ── Sito pubblico ─────────────────────────────────────────────
@@ -31,6 +32,7 @@ Route::post('/newsletter/subscribe', [NewsletterController::class, 'subscribe'])
 Route::get('/privacy-policy', [PageController::class, 'privacyPolicy'])->name('privacy-policy');
 Route::get('/cookie-policy',  [PageController::class, 'cookiePolicy'])->name('cookie-policy');
 Route::get('/note-legali',    [PageController::class, 'noteLegali'])->name('note-legali');
+Route::get('/sitemap.xml',    [SitemapController::class, 'index'])->name('sitemap');
 
 // ── Admin ──────────────────────────────────────────────────────
 Route::prefix('admin')->name('admin.')->group(function () {

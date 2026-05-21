@@ -2,6 +2,48 @@
 
 @section('title', $article->title)
 @section('description', $article->excerpt ?? Str::limit(strip_tags($article->body), 160))
+@section('og_type', 'article')
+@if($article->cover_image)
+    @section('og_image', Storage::url($article->cover_image))
+@endif
+
+@push('og_extra')
+    @if($article->published_at)
+    <meta property="article:published_time" content="{{ $article->published_at->toIso8601String() }}">
+    @endif
+    @if($article->updated_at)
+    <meta property="article:modified_time"  content="{{ $article->updated_at->toIso8601String() }}">
+    @endif
+    @if($article->category)
+    <meta property="article:section"        content="{{ $article->category->name }}">
+    @endif
+@endpush
+
+@push('structured_data')
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "NewsArticle",
+    "headline": {{ Js::from($article->title) }},
+    "description": {{ Js::from($article->excerpt ?? Str::limit(strip_tags($article->body), 160)) }},
+    "url": "{{ url()->current() }}",
+    @if($article->cover_image)
+    "image": "{{ Storage::url($article->cover_image) }}",
+    @endif
+    @if($article->published_at)
+    "datePublished": "{{ $article->published_at->toIso8601String() }}",
+    @endif
+    @if($article->updated_at)
+    "dateModified": "{{ $article->updated_at->toIso8601String() }}",
+    @endif
+    "publisher": {
+        "@type": "Organization",
+        "name": "Montagna Servizi SCPA",
+        "url": "{{ config('app.url') }}"
+    }
+}
+</script>
+@endpush
 
 @section('content')
 

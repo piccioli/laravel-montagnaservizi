@@ -3,6 +3,8 @@
     $currentPath = request()->path();
 @endphp
 
+<div x-data="{ open: false }">
+
 <header class="ms-header" role="banner">
     <div class="l-container">
         <div class="ms-header__inner">
@@ -18,9 +20,21 @@
 
             {{-- Nav desktop --}}
             <nav class="ms-header__nav" aria-label="Navigazione principale">
-                <a href="/chi-siamo" class="{{ str_starts_with($currentPath, 'chi-siamo') ? 'active' : '' }}">Chi siamo</a>
-                <a href="/servizi"   class="{{ str_starts_with($currentPath, 'servizi')   ? 'active' : '' }}">Servizi</a>
-                <a href="/news"      class="{{ str_starts_with($currentPath, 'news')       ? 'active' : '' }}">News</a>
+                <a href="/chi-siamo"
+                   class="{{ str_starts_with($currentPath, 'chi-siamo') ? 'active' : '' }}"
+                   @if(str_starts_with($currentPath, 'chi-siamo')) aria-current="page" @endif>
+                    Chi siamo
+                </a>
+                <a href="/servizi"
+                   class="{{ str_starts_with($currentPath, 'servizi') ? 'active' : '' }}"
+                   @if(str_starts_with($currentPath, 'servizi')) aria-current="page" @endif>
+                    Servizi
+                </a>
+                <a href="/news"
+                   class="{{ str_starts_with($currentPath, 'news') ? 'active' : '' }}"
+                   @if(str_starts_with($currentPath, 'news')) aria-current="page" @endif>
+                    News
+                </a>
             </nav>
 
             {{-- CTA desktop --}}
@@ -32,10 +46,9 @@
 
             {{-- Hamburger --}}
             <button class="ms-header__hamburger"
-                    x-data
-                    @click="$dispatch('open-mobile-menu')"
-                    aria-label="Apri menu"
-                    aria-expanded="false">
+                    @click="open = true"
+                    :aria-expanded="open ? 'true' : 'false'"
+                    :aria-label="open ? 'Chiudi menu' : 'Apri menu'">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
                     <line x1="3" y1="6"  x2="21" y2="6"/>
                     <line x1="3" y1="12" x2="21" y2="12"/>
@@ -48,9 +61,7 @@
 </header>
 
 {{-- Mobile drawer --}}
-<div x-data="{ open: false }"
-     x-on:open-mobile-menu.window="open = true"
-     x-show="open"
+<div x-show="open"
      x-cloak
      class="ms-mobile-menu"
      @click.self="open = false"
@@ -77,9 +88,21 @@
         </div>
 
         <nav class="ms-mobile-menu__nav" aria-label="Menu mobile">
-            <a href="/chi-siamo" @click="open = false">Chi siamo</a>
-            <a href="/servizi"   @click="open = false">Servizi</a>
-            <a href="/news"      @click="open = false">News</a>
+            <a href="/chi-siamo"
+               @click="open = false"
+               @if(str_starts_with($currentPath, 'chi-siamo')) aria-current="page" @endif>
+                Chi siamo
+            </a>
+            <a href="/servizi"
+               @click="open = false"
+               @if(str_starts_with($currentPath, 'servizi')) aria-current="page" @endif>
+                Servizi
+            </a>
+            <a href="/news"
+               @click="open = false"
+               @if(str_starts_with($currentPath, 'news')) aria-current="page" @endif>
+                News
+            </a>
         </nav>
 
         <div class="ms-mobile-menu__cta">
@@ -89,4 +112,6 @@
         </div>
 
     </div>
+</div>
+
 </div>
