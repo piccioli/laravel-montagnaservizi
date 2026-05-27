@@ -96,7 +96,7 @@
         @endif
 
         <div style="margin-top:2.5rem; text-align:center;">
-            <a href="#" class="ms-btn ms-btn--outline" download>
+            <a href="/documents/statuto-montagna-servizi.pdf" class="ms-btn ms-btn--outline" download>
                 Scarica lo Statuto (PDF)
             </a>
         </div>
