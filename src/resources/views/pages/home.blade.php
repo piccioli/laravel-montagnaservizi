@@ -22,7 +22,7 @@
             </p>
             <div class="ms-hero__ctas">
                 <a href="/servizi" class="ms-btn ms-btn--white">Scopri i servizi</a>
-                <a href="{{ config('services.typeform.url') }}" target="_blank" rel="noopener" class="ms-btn ms-btn--outline-white">Contattaci</a>
+                <a href="{{ route('contatti') }}" class="ms-btn ms-btn--outline-white">Contattaci</a>
             </div>
         </div>
     </div>
@@ -104,7 +104,7 @@
         <div class="ms-cta-strip">
             <h2>Pronto a dare una mano alla tua Sezione</h2>
             <p>Raccontaci le tue esigenze: costruiamo insieme la soluzione più adatta. Ti rispondiamo entro 48 ore.</p>
-            <a href="{{ config('services.typeform.url') }}" target="_blank" rel="noopener" class="ms-btn ms-btn--white">
+            <a href="{{ route('contatti') }}" class="ms-btn ms-btn--white">
                 Scrivici
             </a>
         </div>

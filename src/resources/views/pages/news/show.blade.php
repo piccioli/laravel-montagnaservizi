@@ -107,7 +107,7 @@
                 <div class="ms-service-sidebar-box" style="margin-top:1.5rem;">
                     <h3>Hai bisogno di supporto?</h3>
                     <p>Raccontaci le esigenze della tua Sezione.</p>
-                    <a href="{{ config('services.typeform.url') }}" target="_blank" rel="noopener"
+                    <a href="{{ route('contatti') }}"
                        class="ms-btn ms-btn--primary" style="display:block;text-align:center;margin-top:1rem;">
                         Contattaci
                     </a>

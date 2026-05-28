@@ -33,7 +33,7 @@
                     </div>
                 @else
                     <p class="ms-lead">{{ $service->description }}</p>
-                    <p style="color:var(--ms-muted);">Contenuto dettagliato in arrivo. <a href="{{ config('services.typeform.url') }}?source={{ $categorySlug }}" target="_blank" rel="noopener" class="ms-link">Contattaci</a> per maggiori informazioni su questo servizio.</p>
+                    <p style="color:var(--ms-muted);">Contenuto dettagliato in arrivo. <a href="{{ route('contatti', ['source' => $categorySlug]) }}" class="ms-link">Contattaci</a> per maggiori informazioni su questo servizio.</p>
                 @endif
             </div>
 
@@ -42,8 +42,7 @@
                     <p class="ms-service-sidebar-box__cat">{{ $categoryName }}</p>
                     <h3>Hai bisogno di questo servizio?</h3>
                     <p>Raccontaci le esigenze della tua Sezione: ti risponderemo entro 48 ore.</p>
-                    <a href="{{ config('services.typeform.url') }}?source={{ $categorySlug }}"
-                       target="_blank" rel="noopener"
+                    <a href="{{ route('contatti', ['source' => $categorySlug]) }}"
                        class="ms-btn ms-btn--primary"
                        style="display:block;text-align:center;margin-top:1rem;">
                         Richiedi informazioni

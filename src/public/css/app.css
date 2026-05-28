@@ -946,6 +946,22 @@ p:last-child { margin-bottom: 0; }
 }
 
 /* ============================================================
+   Pagina contatti — Typeform embedded
+   ============================================================ */
+.ms-typeform-wrapper {
+    height: calc(100vh - 80px);
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+}
+.ms-typeform-iframe {
+    width: 100%;
+    flex: 1;
+    border: none;
+    display: block;
+}
+
+/* ============================================================
    Chi siamo breve — Home intro strip
    ============================================================ */
 .ms-about-brief {

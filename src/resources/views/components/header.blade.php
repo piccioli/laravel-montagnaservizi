@@ -39,7 +39,7 @@
 
             {{-- CTA desktop --}}
             <div class="ms-header__cta">
-                <a href="{{ $typeformUrl }}" target="_blank" rel="noopener" class="ms-btn ms-btn--primary">
+                <a href="{{ route('contatti') }}" class="ms-btn ms-btn--primary">
                     Contattaci
                 </a>
             </div>
@@ -106,7 +106,7 @@
         </nav>
 
         <div class="ms-mobile-menu__cta">
-            <a href="{{ $typeformUrl }}" target="_blank" rel="noopener" class="ms-btn ms-btn--primary">
+            <a href="{{ route('contatti') }}" class="ms-btn ms-btn--primary">
                 Contattaci
             </a>
         </div>

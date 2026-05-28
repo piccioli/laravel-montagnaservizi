@@ -49,7 +49,7 @@
                 <div class="ms-service-sidebar-box">
                     <h3>Hai bisogno di questo servizio?</h3>
                     <p>Raccontaci le esigenze della tua Sezione: ti risponderemo entro 48 ore.</p>
-                    <a href="{{ config('services.typeform.url') }}?source=consulenze" target="_blank" rel="noopener" class="ms-btn ms-btn--primary" style="display:block;text-align:center;margin-top:1rem;">
+                    <a href="{{ route('contatti', ['source' => 'consulenze']) }}" class="ms-btn ms-btn--primary" style="display:block;text-align:center;margin-top:1rem;">
                         Richiedi informazioni
                     </a>
                 </div>
