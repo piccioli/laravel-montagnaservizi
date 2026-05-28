@@ -22,8 +22,12 @@ jobs:
           envs: TYPEFORM_FORM_ID
           script: |
             cd ${{ secrets.UAT_PROJECT_PATH }}
-            # Inject secrets into .env
-            sed -i "s|^TYPEFORM_FORM_ID=.*|TYPEFORM_FORM_ID=${TYPEFORM_FORM_ID}|" .env
+            # Inject secrets into .env.uat (used as env_file by the app container)
+            if grep -q "^TYPEFORM_FORM_ID=" .env.uat; then
+              sed -i "s|^TYPEFORM_FORM_ID=.*|TYPEFORM_FORM_ID=${TYPEFORM_FORM_ID}|" .env.uat
+            else
+              echo "TYPEFORM_FORM_ID=${TYPEFORM_FORM_ID}" >> .env.uat
+            fi
             ./deploy-uat.sh
         env:
           TYPEFORM_FORM_ID: ${{ secrets.TYPEFORM_FORM_ID }}
