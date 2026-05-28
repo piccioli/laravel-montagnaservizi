@@ -12,6 +12,22 @@ Il versionamento segue [Semantic Versioning](https://semver.org/lang/it/):
 
 ---
 
+## [0.5.3] — 2026-05-28
+
+### Added
+- Pagina `/contatti` con Typeform embedded (header/footer del sito, body = form a tutta altezza)
+- `ContattiController` e route `GET /contatti` con parametro `?source=` per il tracking
+- CSS `.ms-typeform-wrapper` / `.ms-typeform-iframe` per layout full-height
+
+### Changed
+- Tutti i CTA di contatto (header desktop+mobile, home, servizi, 5 pagine categoria, dettaglio servizio, articolo news) aggiornati da link esterno Typeform a link interno `/contatti`
+- Configurazione Typeform: `TYPEFORM_BASE_URL=https://montagnaservizi.typeform.com`, `TYPEFORM_FORM_ID=202605-mdi`
+- Foto team e governance aggiornate con nuove immagini reali (PNG → WebP 400×400, q85)
+- Statuto PDF scaricabile da `/chi-siamo` (aggiunto `public/documents/statuto-montagna-servizi.pdf`, link aggiornato)
+- Bio e ruolo Enrico Sala nel `GovernanceMemberSeeder` compilati da CV reale; `mandate_info` allineato a "Triennio 2024–2027" per tutti i membri
+
+---
+
 ## [0.5.2] — 2026-05-21
 
 ### Changed
@@ -99,7 +115,8 @@ Il versionamento segue [Semantic Versioning](https://semver.org/lang/it/):
 
 ---
 
-[Unreleased]: https://github.com/piccioli/laravel-montagnaservizi/compare/v0.5.2...HEAD
+[Unreleased]: https://github.com/piccioli/laravel-montagnaservizi/compare/v0.5.3...HEAD
+[0.5.3]: https://github.com/piccioli/laravel-montagnaservizi/compare/v0.5.2...v0.5.3
 [0.5.2]: https://github.com/piccioli/laravel-montagnaservizi/compare/v0.5.1...v0.5.2
 [0.5.1]: https://github.com/piccioli/laravel-montagnaservizi/compare/v0.5.0...v0.5.1
 [0.5.0]: https://github.com/piccioli/laravel-montagnaservizi/compare/v0.4.0...v0.5.0
