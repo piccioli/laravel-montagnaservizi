@@ -12,6 +12,14 @@ Il versionamento segue [Semantic Versioning](https://semver.org/lang/it/):
 
 ---
 
+## [0.6.1] — 2026-05-28
+
+### Fixed
+- Deploy UAT: `TYPEFORM_FORM_ID` ora iniettato in `.env.uat` (non `.env`) — il container PHP-FPM usa `env_file: .env.uat`, il `sed` precedente modificava il file sbagliato
+- Aggiunto fallback `echo >>` per il caso in cui la riga non esista ancora in `.env.uat`
+
+---
+
 ## [0.6.0] — 2026-05-28
 
 ### Added
@@ -135,7 +143,8 @@ Il versionamento segue [Semantic Versioning](https://semver.org/lang/it/):
 
 ---
 
-[Unreleased]: https://github.com/piccioli/laravel-montagnaservizi/compare/v0.6.0...HEAD
+[Unreleased]: https://github.com/piccioli/laravel-montagnaservizi/compare/v0.6.1...HEAD
+[0.6.1]: https://github.com/piccioli/laravel-montagnaservizi/compare/v0.6.0...v0.6.1
 [0.6.0]: https://github.com/piccioli/laravel-montagnaservizi/compare/v0.5.3...v0.6.0
 [0.5.3]: https://github.com/piccioli/laravel-montagnaservizi/compare/v0.5.2...v0.5.3
 [0.5.2]: https://github.com/piccioli/laravel-montagnaservizi/compare/v0.5.1...v0.5.2
