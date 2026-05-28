@@ -8,10 +8,9 @@
                 <div class="ms-footer__logo-text">Montagna Servizi SCPA</div>
                 <div class="ms-footer__info">
                     <p>
-                        <strong>Sede legale:</strong> [indirizzo definitivo]<br>
+                        <strong>Sede legale:</strong> Via Petrella 19 — Milano<br>
                         P.IVA 11790660960<br>
-                        <strong>Cod. Interscambio SDI:</strong> M5UXCR1<br>
-                        REA: [numero REA]
+                        <strong>Cod. Interscambio SDI:</strong> M5UXCR1
                     </p>
                     <p>
                         <a href="mailto:info@montagnaservizi.com">info@montagnaservizi.com</a>

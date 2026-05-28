@@ -12,6 +12,26 @@ Il versionamento segue [Semantic Versioning](https://semver.org/lang/it/):
 
 ---
 
+## [0.6.0] — 2026-05-28
+
+### Added
+- Blog di lancio: 9 articoli reali nel `NewsSeeder` (4 in categoria "eventi", 5 in "approfondimenti")
+  - Eventi: Assemblea Delegati Modena, Italian Outdoor Festival, Fa' la Cosa Giusta, Salone del Libro Torino
+  - Approfondimenti: Veryfico gestione digitale, SICAI 2026, norme fiscali ETS, proroga IVA, bilancio sezioni CAI
+- `progettazione/fase6/screenshots/` — directory per screenshot di fase (da popolare manualmente)
+- Report di chiusura Fase 6 (`progettazione/report_fasi/2026_MS_sitoweb_report_fase_6.md`)
+
+### Changed
+- Privacy Policy: aggiunta sezione newsletter Brevo, Typeform come responsabile esterno, data aggiornamento
+- Cookie Policy: dettaglio cookie tecnici Laravel, link policy Typeform, sezione titolare con sede
+- Note Legali: sede reale Via Petrella 19 Milano, foro Milano, sezione link esterni, sezione contatti
+- Footer: sede legale reale "Via Petrella 19 — Milano", rimosso placeholder REA
+- `NewsSeeder`: rimosso pattern delete+insert, sostituito con `truncate()` per reset pulito ad ogni run
+- `DatabaseSeeder`: rimosso `NewsDemoSeeder::class` (40 news placeholder eliminate definitivamente)
+- DB seed locale (`docker-local/db-seed/ms_laravel.sql`) aggiornato con contenuti Fase 6
+
+---
+
 ## [0.5.3] — 2026-05-28
 
 ### Added
@@ -115,7 +135,8 @@ Il versionamento segue [Semantic Versioning](https://semver.org/lang/it/):
 
 ---
 
-[Unreleased]: https://github.com/piccioli/laravel-montagnaservizi/compare/v0.5.3...HEAD
+[Unreleased]: https://github.com/piccioli/laravel-montagnaservizi/compare/v0.6.0...HEAD
+[0.6.0]: https://github.com/piccioli/laravel-montagnaservizi/compare/v0.5.3...v0.6.0
 [0.5.3]: https://github.com/piccioli/laravel-montagnaservizi/compare/v0.5.2...v0.5.3
 [0.5.2]: https://github.com/piccioli/laravel-montagnaservizi/compare/v0.5.1...v0.5.2
 [0.5.1]: https://github.com/piccioli/laravel-montagnaservizi/compare/v0.5.0...v0.5.1
