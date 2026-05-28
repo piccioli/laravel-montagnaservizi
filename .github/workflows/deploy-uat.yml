@@ -19,9 +19,14 @@ jobs:
           host: ${{ secrets.UAT_HOST }}
           username: ${{ secrets.UAT_USER }}
           key: ${{ secrets.UAT_SSH_KEY }}
+          envs: TYPEFORM_FORM_ID
           script: |
             cd ${{ secrets.UAT_PROJECT_PATH }}
+            # Inject secrets into .env
+            sed -i "s|^TYPEFORM_FORM_ID=.*|TYPEFORM_FORM_ID=${TYPEFORM_FORM_ID}|" .env
             ./deploy-uat.sh
+        env:
+          TYPEFORM_FORM_ID: ${{ secrets.TYPEFORM_FORM_ID }}
 
   smoke-test:
     needs: deploy
