@@ -30,8 +30,8 @@ return [
 
     'typeform' => [
         'form_id'  => env('TYPEFORM_FORM_ID', 'PLACEHOLDER'),
-        'base_url' => env('TYPEFORM_BASE_URL', 'https://form.typeform.com/to'),
-        'url'      => rtrim(env('TYPEFORM_BASE_URL', 'https://form.typeform.com/to'), '/') . '/' . env('TYPEFORM_FORM_ID', 'PLACEHOLDER'),
+        'base_url' => env('TYPEFORM_BASE_URL', 'https://montagnaservizi.typeform.com'),
+        'url'      => rtrim(env('TYPEFORM_BASE_URL', 'https://montagnaservizi.typeform.com'), '/') . '/' . env('TYPEFORM_FORM_ID', 'PLACEHOLDER'),
     ],
 
     'gtm' => [
