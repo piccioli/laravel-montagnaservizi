@@ -11,14 +11,15 @@ class NewsSeeder extends Seeder
     public function run(): void
     {
         $comunicazioni   = NewsCategory::where('slug', 'comunicazioni')->first();
+        $eventi          = NewsCategory::where('slug', 'eventi')->first();
         $approfondimenti = NewsCategory::where('slug', 'approfondimenti')->first();
 
         $articles = [
 
-            // ── Comunicazioni ────────────────────────────────────────────
+            // ── Eventi ───────────────────────────────────────────────────
 
             [
-                'news_category_id' => $comunicazioni?->id,
+                'news_category_id' => $eventi?->id,
                 'title'            => 'Assemblea dei Delegati CAI 2026: appuntamento a Modena il 30 e 31 maggio',
                 'slug'             => 'assemblea-delegati-cai-2026-modena',
                 'excerpt'          => 'Il Club Alpino Italiano convoca l\'Assemblea dei Delegati 2026 a Modena, presso il BPER Forum "Guido Monzani". Due giornate dedicate alla vita associativa del CAI, tra bilanci, elezioni, cambiamenti climatici e futuro della montagna.',
@@ -28,7 +29,7 @@ class NewsSeeder extends Seeder
             ],
 
             [
-                'news_category_id' => $comunicazioni?->id,
+                'news_category_id' => $eventi?->id,
                 'title'            => 'CAI e Sentiero Italia CAI protagonisti all\'Italian Outdoor Festival 2026',
                 'slug'             => 'cai-sentiero-italia-italian-outdoor-festival-2026',
                 'excerpt'          => 'Il 9 e 10 maggio 2026 Montagna Servizi ha curato la presenza del Club Alpino Italiano all\'Italian Outdoor Festival di Milano, con uno stand dedicato al Sentiero Italia CAI. Due giornate con interesse concreto per il SICAI e la proiezione del documentario "Endless Peaks".',
@@ -38,7 +39,7 @@ class NewsSeeder extends Seeder
             ],
 
             [
-                'news_category_id' => $comunicazioni?->id,
+                'news_category_id' => $eventi?->id,
                 'title'            => 'Montagna Servizi alla fiera "Fa\' la cosa giusta!" — Milano, 13-15 marzo 2026',
                 'slug'             => 'montagna-servizi-fa-la-cosa-giusta-2026',
                 'excerpt'          => 'Dal 13 al 15 marzo 2026 Montagna Servizi ha partecipato alla fiera di Milano "Fa\' la cosa giusta!" all\'interno dello stand del Club Alpino Italiano, in un contesto dedicato alla sostenibilità, al turismo lento e alla cultura della montagna.',
@@ -48,7 +49,7 @@ class NewsSeeder extends Seeder
             ],
 
             [
-                'news_category_id' => $comunicazioni?->id,
+                'news_category_id' => $eventi?->id,
                 'title'            => 'Il CAI al Salone Internazionale del Libro di Torino 2026',
                 'slug'             => 'cai-salone-libro-torino-2026',
                 'excerpt'          => 'Il Club Alpino Italiano, con il supporto operativo di Montagna Servizi, ha preso parte al Salone Internazionale del Libro 2026 di Torino. Incasso di € 6.186,70 con 411 articoli venduti, presentazioni editoriali e il contributo dei volontari della Sezione CAI Torino.',
