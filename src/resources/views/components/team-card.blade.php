@@ -21,7 +21,7 @@
         <h4>{{ $member->name }}</h4>
         <p class="ms-team-role">{{ $member->role }}</p>
         @if($member->bio)
-            <p class="ms-team-bio">{{ Str::limit($member->bio, 120) }}</p>
+            <p class="ms-team-bio">{{ $member->bio }}</p>
         @endif
     </div>
 </article>

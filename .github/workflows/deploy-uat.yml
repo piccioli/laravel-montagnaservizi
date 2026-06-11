@@ -29,6 +29,10 @@ jobs:
               echo "TYPEFORM_FORM_ID=${TYPEFORM_FORM_ID}" >> .env.uat
             fi
             ./deploy-uat.sh
+            # Force-recreate app container so it reads the updated .env.uat,
+            # then re-cache config with the correct env vars
+            docker compose -f docker-uat/docker-compose.yml --env-file .env.uat up -d --force-recreate app
+            docker compose -f docker-uat/docker-compose.yml --env-file .env.uat exec app php artisan config:cache
         env:
           TYPEFORM_FORM_ID: ${{ secrets.TYPEFORM_FORM_ID }}
 
