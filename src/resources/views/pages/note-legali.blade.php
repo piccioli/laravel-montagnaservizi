@@ -23,11 +23,12 @@
             Società Cooperativa per Azioni<br>
             C.F. / P.IVA: 11790660960<br>
             Codice SDI: M5UXCR1<br>
-            Sede legale: Via Petrella 19 — Milano<br>
+            Sede legale: Via Errico Petrella 19, 20124 Milano (MI)<br>
             REA: MI — [da completare]</p>
 
             <h2>Contatti</h2>
             <p>Email: <a href="mailto:info@montagnaservizi.com">info@montagnaservizi.com</a><br>
+            PEC: <a href="mailto:montagnaserviziscpa@legalmail.it">montagnaserviziscpa@legalmail.it</a><br>
             Sito web: <a href="https://www.montagnaservizi.com">www.montagnaservizi.com</a></p>
 
             <h2>Responsabile del sito</h2>
