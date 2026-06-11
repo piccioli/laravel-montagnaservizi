@@ -23,7 +23,7 @@
             <h2>1. Titolare del trattamento</h2>
             <p><strong>Montagna Servizi SCPA</strong><br>
             C.F. / P.IVA: 11790660960<br>
-            Sede legale: Via Petrella 19 — Milano<br>
+            Sede legale: Via Errico Petrella 19, 20124 Milano (MI)<br>
             Email: <a href="mailto:info@montagnaservizi.com">info@montagnaservizi.com</a></p>
 
             <h2>2. Dati trattati e finalità</h2>

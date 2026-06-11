@@ -16,7 +16,7 @@
         <div class="ms-hero__inner">
             <span class="ms-hero__eyebrow"><a href="/servizi" style="color:inherit;opacity:.7;">Servizi</a> &rsaquo; Contabilità Veryfico</span>
             <h1>Contabilità Veryfico</h1>
-            <p class="ms-hero__sub">Gestiamo la contabilità della tua Sezione con il software ufficiale CAI, in totale conformità con le linee guida del CAI Centrale.</p>
+            <p class="ms-hero__sub">Gestiamo la contabilità della tua Sezione con Veryfico, in totale conformità con le normative del Terzo Settore e le linee guida del CAI Centrale.</p>
         </div>
     </div>
 </section>
@@ -25,7 +25,7 @@
     <div class="l-container">
         <div class="ms-service-layout">
             <div class="ms-service-body">
-                <p class="ms-lead">Veryfico è il software contabile adottato dal Club Alpino Italiano per la gestione economico-finanziaria delle Sezioni. Il nostro team è specializzato nell'utilizzo di questa piattaforma e garantisce una tenuta accurata, puntuale e conforme alle normative del Terzo Settore.</p>
+                <p class="ms-lead">Veryfico è la piattaforma gestionale e contabile integrata nel sistema CAI, progettata per la gestione economico-finanziaria delle Sezioni. Il nostro team è specializzato nell'utilizzo di Veryfico e garantisce una tenuta accurata, puntuale e conforme alle normative del Terzo Settore.</p>
 
                 <h2>Cosa includiamo</h2>
                 <div class="ms-service-list">

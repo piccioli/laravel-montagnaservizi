@@ -368,6 +368,7 @@ p:last-child { margin-bottom: 0; }
 .ms-vp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; }
 .ms-vp-item { text-align: center; }
 .ms-vp-icon { font-size: 2.5rem; margin-bottom: .875rem; display: block; }
+.ms-vp-icon svg { width: 2.5rem; height: 2.5rem; color: var(--ms-green); }
 .ms-vp-item h3 { margin-bottom: .375rem; }
 .ms-vp-item p  { color: var(--ms-muted); font-size: .9375rem; }
 
@@ -388,6 +389,7 @@ p:last-child { margin-bottom: 0; }
 }
 .ms-service-card:hover { box-shadow: var(--ms-shadow-lg); transform: translateY(-3px); }
 .ms-service-card__icon { font-size: 2rem; margin-bottom: .875rem; }
+.ms-service-card__icon svg { width: 2rem; height: 2rem; color: var(--ms-green); }
 .ms-service-card h3 { font-size: .9375rem; margin-bottom: .5rem; }
 .ms-service-card p  { font-size: .875rem; color: var(--ms-muted); line-height: 1.55; flex: 1; margin-bottom: 1rem; }
 .ms-service-card__link {
@@ -479,7 +481,6 @@ p:last-child { margin-bottom: 0; }
   background: var(--ms-white);
   border: 1px solid var(--ms-border);
   border-radius: var(--ms-radius);
-  overflow: hidden;
   text-align: center;
   transition: box-shadow .2s;
 }
