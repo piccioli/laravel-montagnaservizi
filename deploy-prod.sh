@@ -3,7 +3,7 @@
 # deploy-prod.sh — Deploy su ambiente Produzione
 #
 # Eseguire dal server, nella root del progetto clonato:
-#   cd /srv/montagnaservizi && ./deploy-prod.sh
+#   cd /srv/montagnaservizi.com-prod && ./deploy-prod.sh
 #
 # Prerequisiti (solo prima esecuzione):
 #   1. docker-traefik avviato (vedi README)
@@ -32,6 +32,11 @@ git -C "$PROJECT_ROOT" pull origin main
 step "Build immagine PHP-FPM..."
 docker compose -f "$DOCKER_DIR/docker-compose.yml" --env-file "$ENV_FILE" \
     build --pull app
+
+# ── Avvio stack (idempotente — necessario dopo reboot) ───────
+step "Stack up..."
+docker compose -f "$DOCKER_DIR/docker-compose.yml" --env-file "$ENV_FILE" \
+    up -d --remove-orphans
 
 # ── Dipendenze PHP (no-dev) ──────────────────────────────────
 step "Installing PHP dependencies (--no-dev)..."
