@@ -7,6 +7,12 @@
 
 {{-- Hero compatto --}}
 <section class="ms-hero ms-hero--inner">
+    <img src="{{ Storage::url('hero/hero-chi-siamo.webp') }}"
+         alt="Escursionisti in cammino su sentiero alpino"
+         class="ms-hero__bg-img"
+         width="1440" height="500"
+         loading="eager"
+         role="presentation">
     <div class="l-container">
         <div class="ms-hero__inner">
             <span class="ms-hero__eyebrow">Chi siamo</span>
@@ -30,24 +36,24 @@
 <section class="l-section" id="mission">
     <div class="l-container">
         <div class="l-section-header">
-            <h2>Mission e valori</h2>
-            <p class="l-section-lead">Nata per supportare le Sezioni CAI, Montagna Servizi SCPA opera in logica mutualistica e collaborativa.</p>
+            <h2>La nostra missione</h2>
+            <p class="l-section-lead">Montagna Servizi SCPA è nata per permettere alle Sezioni CAI di concentrarsi su ciò che conta davvero — la montagna, la comunità e le persone — liberandole dal peso della gestione amministrativa quotidiana.</p>
         </div>
         <div class="ms-vp-grid">
             <div class="ms-vp-item">
-                <span class="ms-vp-icon">🏔️</span>
-                <h3>Expertise CAI</h3>
-                <p>Conosciamo in profondità le specificità delle Sezioni CAI: normativa, software Veryfico, rapporti con il CAI Centrale e le strutture regionali.</p>
-            </div>
-            <div class="ms-vp-item">
                 <span class="ms-vp-icon">🤝</span>
-                <h3>Spirito mutualistico</h3>
-                <p>Siamo una cooperativa: condividiamo i valori associativi del CAI e operiamo mettendo al centro le esigenze dei soci prima del profitto.</p>
+                <h3>Affidabilità</h3>
+                <p>Siamo il partner di riferimento del CAI: presenti, responsabili, con processi rodati e risposte rapide. Ogni Sezione sa di poter contare su di noi.</p>
             </div>
             <div class="ms-vp-item">
-                <span class="ms-vp-icon">⚡</span>
-                <h3>Efficienza operativa</h3>
-                <p>Processi rodati, risposta rapida e interlocutori dedicati per ogni Sezione cliente. Meno burocrazia, più risultati.</p>
+                <span class="ms-vp-icon">🎓</span>
+                <h3>Competenza</h3>
+                <p>Team specializzato in Terzo Settore, fiscalità associativa, software Veryfico e strumenti digitali: conosciamo il mondo CAI in profondità.</p>
+            </div>
+            <div class="ms-vp-item">
+                <span class="ms-vp-icon">🏔️</span>
+                <h3>Prossimità</h3>
+                <p>Siamo una cooperativa: condividiamo i valori del CAI e costruiamo risposte su misura per ogni realtà territoriale, grande o piccola.</p>
             </div>
         </div>
     </div>
@@ -90,7 +96,7 @@
         @endif
 
         <div style="margin-top:2.5rem; text-align:center;">
-            <a href="#" class="ms-btn ms-btn--outline" download>
+            <a href="/documents/statuto-montagna-servizi.pdf" class="ms-btn ms-btn--outline" download>
                 Scarica lo Statuto (PDF)
             </a>
         </div>

@@ -6,6 +6,12 @@
 @section('content')
 
 <section class="ms-hero ms-hero--inner">
+    <img src="{{ Storage::url('hero/hero-servizi.webp') }}"
+         alt="Crocevia alpino — simbolo del supporto e dell'orientamento di Montagna Servizi"
+         class="ms-hero__bg-img"
+         width="1440" height="500"
+         loading="eager"
+         role="presentation">
     <div class="l-container">
         <div class="ms-hero__inner">
             <span class="ms-hero__eyebrow">I nostri servizi</span>
@@ -52,7 +58,7 @@
         <div class="ms-cta-strip">
             <h2>Non sai da dove iniziare?</h2>
             <p>Raccontaci la tua situazione: ti aiutiamo a capire di cosa ha bisogno la tua Sezione.</p>
-            <a href="{{ config('services.typeform.url') }}" target="_blank" rel="noopener" class="ms-btn ms-btn--white">
+            <a href="{{ route('contatti') }}" class="ms-btn ms-btn--white">
                 Parla con noi
             </a>
         </div>

@@ -1,0 +1,55 @@
+name: Deploy UAT
+
+on:
+  push:
+    branches: [develop]
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: uat
+
+    steps:
+      - name: Deploy to UAT via SSH
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.UAT_HOST }}
+          username: ${{ secrets.UAT_USER }}
+          key: ${{ secrets.UAT_SSH_KEY }}
+          envs: TYPEFORM_FORM_ID
+          script: |
+            cd ${{ secrets.UAT_PROJECT_PATH }}
+            # Inject secrets into .env.uat (used as env_file by the app container)
+            if grep -q "^TYPEFORM_FORM_ID=" .env.uat; then
+              sed -i "s|^TYPEFORM_FORM_ID=.*|TYPEFORM_FORM_ID=${TYPEFORM_FORM_ID}|" .env.uat
+            else
+              echo "TYPEFORM_FORM_ID=${TYPEFORM_FORM_ID}" >> .env.uat
+            fi
+            ./deploy-uat.sh
+            # Force-recreate app container so it reads the updated .env.uat,
+            # then re-cache config with the correct env vars
+            docker compose -f docker-uat/docker-compose.yml --env-file .env.uat up -d --force-recreate app
+            docker compose -f docker-uat/docker-compose.yml --env-file .env.uat exec app php artisan config:cache
+        env:
+          TYPEFORM_FORM_ID: ${{ secrets.TYPEFORM_FORM_ID }}
+
+  smoke-test:
+    needs: deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Wait for stack to settle
+        run: sleep 15
+
+      - name: HTTP smoke test
+        run: |
+          STATUS=$(curl -o /dev/null -s -w "%{http_code}" \
+            --max-time 30 \
+            https://uat.montagnaservizi.com)
+          echo "HTTP status: $STATUS"
+          # 200 = ok, 401 = basic auth attivo (UAT protetto — server up)
+          [[ "$STATUS" == "200" || "$STATUS" == "401" ]] \
+            || (echo "Smoke test FAILED (status $STATUS)" && exit 1)

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin;
 use App\Http\Controllers\ChiSiamoController;
+use App\Http\Controllers\ContattiController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\PageController;
@@ -12,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 // ── Sito pubblico ─────────────────────────────────────────────
 Route::get('/',          [PageController::class, 'home'])->name('home');
 Route::get('/chi-siamo', [ChiSiamoController::class, 'index'])->name('chi-siamo');
+Route::get('/contatti',  [ContattiController::class, 'index'])->name('contatti');
 
 Route::get('/servizi', [PageController::class, 'servizi'])->name('servizi');
 

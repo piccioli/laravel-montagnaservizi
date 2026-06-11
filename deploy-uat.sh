@@ -27,13 +27,18 @@ warn() { echo -e "${YELLOW}[warn]${NC} $1"; }
     exit 1; }
 
 # ── Pull codice ──────────────────────────────────────────────
-step "Pulling codice da origin/main..."
-git -C "$PROJECT_ROOT" pull origin main
+step "Pulling codice da origin/develop..."
+git -C "$PROJECT_ROOT" pull origin develop
 
 # ── Build immagine app (solo se Dockerfile cambiato) ─────────
 step "Build immagine PHP-FPM..."
 docker compose -f "$DOCKER_DIR/docker-compose.yml" --env-file "$ENV_FILE" \
     build --pull app
+
+# ── Avvio stack (idempotente — necessario dopo reboot) ───────
+step "Stack up..."
+docker compose -f "$DOCKER_DIR/docker-compose.yml" --env-file "$ENV_FILE" \
+    up -d --remove-orphans
 
 # ── Dipendenze PHP (no-dev) ──────────────────────────────────
 step "Installing PHP dependencies (--no-dev)..."
@@ -41,10 +46,14 @@ docker compose -f "$DOCKER_DIR/docker-compose.yml" --env-file "$ENV_FILE" \
     run --rm --no-deps app \
     composer install --no-dev --optimize-autoloader --no-interaction --quiet
 
-# ── Migrazioni ───────────────────────────────────────────────
-step "Esecuzione migrazioni..."
+# ── DB reset + seed (UAT — dati demo freschi ad ogni deploy) ─
+step "migrate:fresh — reset completo DB..."
 docker compose -f "$DOCKER_DIR/docker-compose.yml" --env-file "$ENV_FILE" \
-    exec app php artisan migrate --force
+    exec app php artisan migrate:fresh --force
+
+step "Seed dati iniziali..."
+docker compose -f "$DOCKER_DIR/docker-compose.yml" --env-file "$ENV_FILE" \
+    exec app php artisan db:seed --force
 
 # ── Storage symlink ──────────────────────────────────────────
 step "Storage link..."
@@ -59,6 +68,11 @@ docker compose -f "$DOCKER_DIR/docker-compose.yml" --env-file "$ENV_FILE" \
     exec app php artisan route:cache
 docker compose -f "$DOCKER_DIR/docker-compose.yml" --env-file "$ENV_FILE" \
     exec app php artisan view:cache
+
+# ── Permessi storage (www-data deve poter scrivere) ──────────
+step "Fix permessi storage e cache..."
+docker compose -f "$DOCKER_DIR/docker-compose.yml" --env-file "$ENV_FILE" \
+    exec app chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
 # ── Restart PHP-FPM ─────────────────────────────────────────
 step "Restart app container..."

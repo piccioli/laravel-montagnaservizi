@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\News;
 use App\Models\NewsCategory;
-use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
@@ -55,9 +54,36 @@ class NewsDemoSeeder extends Seeder
         'Montagna Servizi SCPA: i numeri del 2025 in sintesi',
     ];
 
+    private const EXCERPTS = [
+        'Montagna Servizi SCPA aggiorna le proprie procedure per offrire un supporto sempre più efficiente alle Sezioni e ai Gruppi Regionali del Club Alpino Italiano.',
+        'Una panoramica completa sulle novità introdotte nel servizio, con indicazioni pratiche per i responsabili delle Sezioni CAI che ne usufruiscono.',
+        'Il documento illustra le principali modifiche operative e le scadenze da rispettare per il corretto svolgimento delle attività amministrative.',
+        'Montagna Servizi SCPA mette a disposizione nuove risorse e strumenti per supportare le Sezioni nella gestione quotidiana delle attività sociali.',
+        'Un aggiornamento importante per tutti i referenti delle Sezioni CAI: ecco le informazioni essenziali da conoscere e le azioni da intraprendere.',
+        'Il comunicato fornisce chiarimenti sulle procedure in vigore e introduce miglioramenti significativi nel servizio offerto alle Sezioni.',
+        'Le novità presentate in questo articolo riguardano direttamente la gestione amministrativa e contabile delle Sezioni e dei Gruppi Regionali.',
+        'Montagna Servizi SCPA condivide i risultati raggiunti e le prospettive future per continuare a supportare al meglio le realtà del CAI.',
+    ];
+
+    private const BODY_PARAGRAPHS = [
+        '<p><strong>Montagna Servizi SCPA continua a rafforzare il proprio impegno verso le Sezioni e i Gruppi Regionali del Club Alpino Italiano, introducendo aggiornamenti significativi nei propri servizi.</strong></p>',
+        '<p>Le modifiche introdotte rispondono alle esigenze emerse nel corso delle consultazioni con i referenti delle Sezioni, che hanno segnalato la necessità di strumenti più efficaci e procedure semplificate per la gestione delle attività quotidiane.</p>',
+        '<p>Il servizio di segreteria operativa ha registrato una crescita costante nelle richieste di supporto, segno di una fiducia sempre maggiore da parte delle Sezioni nei confronti di Montagna Servizi SCPA come partner strategico.</p>',
+        '<p>Gli aggiornamenti riguardano in particolare la gestione documentale, la rendicontazione delle attività e il supporto alla comunicazione istituzionale, ambiti in cui le Sezioni hanno espresso il maggiore interesse per un miglioramento dei servizi.</p>',
+        '<p>Il team di Montagna Servizi SCPA è a disposizione per fornire chiarimenti e supporto nell\'implementazione delle nuove procedure, garantendo una transizione fluida e senza interruzioni nelle attività delle Sezioni.</p>',
+        '<p>Per ulteriori informazioni o per richiedere un appuntamento con uno dei nostri consulenti, è possibile contattare la segreteria operativa attraverso i canali ufficiali di Montagna Servizi SCPA.</p>',
+    ];
+
+    private const LIST_ITEMS = [
+        ['Aggiornamento delle procedure di registrazione dei soci', 'Nuovi modelli per la rendicontazione delle attività', 'Supporto dedicato per le Sezioni di nuova costituzione'],
+        ['Revisione del contratto di servizio', 'Nuove tariffe per le consulenze specialistiche', 'Estensione del supporto alla comunicazione digitale'],
+        ['Formazione online per i responsabili amministrativi', 'Strumenti di reportistica avanzata', 'Assistenza nella predisposizione del bilancio sociale'],
+        ['Aggiornamento del software gestionale', 'Nuovi template per la comunicazione istituzionale', 'Supporto alla gestione dei volontari'],
+        ['Revisione delle procedure assicurative', 'Aggiornamento normativo per il Terzo Settore', 'Nuovi servizi di consulenza legale'],
+    ];
+
     public function run(): void
     {
-        $faker      = Faker::create('it_IT');
         $categories = NewsCategory::all();
 
         if ($categories->isEmpty()) {
@@ -84,14 +110,14 @@ class NewsDemoSeeder extends Seeder
             }
 
             $coverImage  = $this->downloadImage($n);
-            $publishedAt = $faker->dateTimeBetween('-12 months', '-1 day');
+            $publishedAt = $this->randomDate($index);
 
             News::create([
-                'news_category_id' => $categories->random()->id,
+                'news_category_id' => $categories->get($index % $categories->count())->id,
                 'title'            => $title,
                 'slug'             => $slug,
-                'excerpt'          => rtrim($faker->paragraph(2), '.') . '.',
-                'body'             => $this->buildBody($faker),
+                'excerpt'          => self::EXCERPTS[$index % count(self::EXCERPTS)],
+                'body'             => $this->buildBody($index),
                 'cover_image'      => $coverImage,
                 'published_at'     => $publishedAt,
             ]);
@@ -102,6 +128,34 @@ class NewsDemoSeeder extends Seeder
         }
 
         $this->command->info("Completato: {$created} creati, {$skipped} già presenti.");
+    }
+
+    private function randomDate(int $seed): \DateTime
+    {
+        $daysAgo = ($seed * 9 + 7) % 365 + 1;
+        return (new \DateTime())->modify("-{$daysAgo} days");
+    }
+
+    private function buildBody(int $index): string
+    {
+        $html = self::BODY_PARAGRAPHS[0];
+
+        $paragraphCount = ($index % 3) + 3;
+        for ($i = 1; $i <= $paragraphCount && $i < count(self::BODY_PARAGRAPHS); $i++) {
+            $html .= self::BODY_PARAGRAPHS[$i];
+        }
+
+        if ($index % 2 === 0) {
+            $listSet = self::LIST_ITEMS[$index % count(self::LIST_ITEMS)];
+            $html .= "<ul>\n";
+            foreach ($listSet as $item) {
+                $html .= "    <li>{$item}</li>\n";
+            }
+            $html .= "</ul>\n";
+            $html .= self::BODY_PARAGRAPHS[count(self::BODY_PARAGRAPHS) - 1];
+        }
+
+        return $html;
     }
 
     private function downloadImage(int $index): ?string
@@ -124,29 +178,5 @@ class NewsDemoSeeder extends Seeder
         }
 
         return null;
-    }
-
-    private function buildBody(\Faker\Generator $faker): string
-    {
-        $paragraphs = $faker->paragraphs(rand(4, 6));
-        $html       = '';
-
-        foreach ($paragraphs as $i => $para) {
-            $html .= $i === 0
-                ? "<p><strong>{$para}</strong></p>\n"
-                : "<p>{$para}</p>\n";
-        }
-
-        if ($faker->boolean(50)) {
-            $items = $faker->sentences(rand(3, 5));
-            $html .= "<ul>\n";
-            foreach ($items as $item) {
-                $html .= "    <li>{$item}</li>\n";
-            }
-            $html .= "</ul>\n";
-            $html .= '<p>' . $faker->paragraph() . "</p>\n";
-        }
-
-        return $html;
     }
 }

@@ -6,6 +6,12 @@
 @section('content')
 
 <section class="ms-hero ms-hero--inner">
+    <img src="{{ Storage::url('hero/hero-servizi.webp') }}"
+         alt="Sentiero alpino — i servizi di Montagna Servizi per le Sezioni CAI"
+         class="ms-hero__bg-img"
+         width="1440" height="500"
+         loading="eager"
+         role="presentation">
     <div class="l-container">
         <div class="ms-hero__inner">
             <span class="ms-hero__eyebrow"><a href="/servizi" style="color:inherit;opacity:.7;">Servizi</a> &rsaquo; Segreteria Operativa</span>
@@ -43,7 +49,7 @@
                 <div class="ms-service-sidebar-box">
                     <h3>Hai bisogno di questo servizio?</h3>
                     <p>Raccontaci le esigenze della tua Sezione: ti risponderemo entro 48 ore.</p>
-                    <a href="{{ config('services.typeform.url') }}?source=segreteria-operativa" target="_blank" rel="noopener" class="ms-btn ms-btn--primary" style="display:block;text-align:center;margin-top:1rem;">
+                    <a href="{{ route('contatti', ['source' => 'segreteria-operativa']) }}" class="ms-btn ms-btn--primary" style="display:block;text-align:center;margin-top:1rem;">
                         Richiedi informazioni
                     </a>
                 </div>
