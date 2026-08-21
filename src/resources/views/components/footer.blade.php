@@ -8,8 +8,8 @@
                 <div class="ms-footer__logo-text">Montagna Servizi SCPA</div>
                 <div class="ms-footer__info">
                     <p>
-                        <strong>Sede legale:</strong> Via Errico Petrella 19<br>
-                        20124 Milano (MI)<br>
+                        <strong>Sede legale:</strong> Via Decorati al Valor Civile 15<br>
+                        20138 Milano (MI)<br>
                         P.IVA 11790660960<br>
                         <strong>SDI:</strong> M5UXCR1
                     </p>
