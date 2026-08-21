@@ -44,7 +44,7 @@
             <p>L'utente può modificare o revocare il proprio consenso in qualsiasi momento agendo sul banner che compare alla prima visita oppure svuotando il localStorage del browser. È inoltre possibile configurare il browser per bloccare o eliminare i cookie.</p>
 
             <h2>6. Titolare del trattamento</h2>
-            <p><strong>Montagna Servizi SCPA</strong> — Via Petrella 19, Milano<br>
+            <p><strong>Montagna Servizi SCPA</strong> — Via Decorati al Valor Civile 15, 20138 Milano (MI)<br>
             Email: <a href="mailto:info@montagnaservizi.com">info@montagnaservizi.com</a></p>
 
             <p class="ms-legal-note"><em>Ultimo aggiornamento: maggio 2026.</em></p>
