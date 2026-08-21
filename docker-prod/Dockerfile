@@ -1,5 +1,7 @@
 FROM php:8.4-fpm-alpine
 
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+
 RUN apk add --no-cache libpng-dev libzip-dev oniguruma-dev icu-dev \
     && docker-php-ext-install pdo pdo_mysql mbstring bcmath fileinfo zip intl opcache
 

@@ -28,7 +28,7 @@ Sito istituzionale di [Montagna Servizi SCPA](https://montagnaservizi.com), la c
 |---|---|---|
 | Locale | `http://localhost:8080` | qualsiasi |
 | UAT | `https://uat.montagnaservizi.com` | `develop` (auto-deploy) |
-| Produzione | `https://montagnaservizi.com` | `main` |
+| Produzione | `https://www.montagnaservizi.com` | `main` (auto-deploy) |
 
 ---
 
@@ -58,12 +58,16 @@ Il sito sarà disponibile su `http://localhost:8080`.
 ## Gitflow
 
 ```
-main        → produzione (protetto)
+main        → produzione (protetto, auto-deploy su push)
 develop     → UAT (auto-deploy su push)
 feature/*   → nuove funzionalità
 fix/*       → bugfix
 hotfix/*    → fix urgenti su produzione
 ```
+
+Push su `main` avvia il workflow **Deploy Prod** (`./deploy-prod.sh` via SSH + smoke test su https://www.montagnaservizi.com).
+
+Secrets GitHub (environment `production`): `PROD_HOST`, `PROD_USER`, `PROD_SSH_KEY`, `PROD_PROJECT_PATH` (es. `/srv/montagnaservizi.com-prod`). `TYPEFORM_FORM_ID` è lo stesso secret usato da UAT.
 
 ---
 

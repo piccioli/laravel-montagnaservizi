@@ -1,0 +1,55 @@
+name: Deploy Prod
+
+on:
+  push:
+    branches: [main]
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+      - name: Deploy to production via SSH
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.PROD_HOST }}
+          username: ${{ secrets.PROD_USER }}
+          key: ${{ secrets.PROD_SSH_KEY }}
+          command_timeout: 20m
+          envs: TYPEFORM_FORM_ID
+          script: |
+            cd ${{ secrets.PROD_PROJECT_PATH }}
+            git checkout main
+            git restore src/public/robots.txt 2>/dev/null || true
+            # Inject secrets into .env.prod (used as env_file by the app container)
+            if grep -q "^TYPEFORM_FORM_ID=" .env.prod; then
+              sed -i "s|^TYPEFORM_FORM_ID=.*|TYPEFORM_FORM_ID=${TYPEFORM_FORM_ID}|" .env.prod
+            else
+              echo "TYPEFORM_FORM_ID=${TYPEFORM_FORM_ID}" >> .env.prod
+            fi
+            ./deploy-prod.sh
+            docker compose -f docker-prod/docker-compose.yml --env-file .env.prod up -d --force-recreate app
+            docker compose -f docker-prod/docker-compose.yml --env-file .env.prod exec app php artisan config:cache
+        env:
+          TYPEFORM_FORM_ID: ${{ secrets.TYPEFORM_FORM_ID }}
+
+  smoke-test:
+    needs: deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Wait for stack to settle
+        run: sleep 15
+
+      - name: HTTP smoke test
+        run: |
+          STATUS=$(curl -o /dev/null -s -w "%{http_code}" \
+            --max-time 30 \
+            https://www.montagnaservizi.com)
+          echo "HTTP status: $STATUS"
+          [[ "$STATUS" == "200" ]] \
+            || (echo "Smoke test FAILED (status $STATUS)" && exit 1)

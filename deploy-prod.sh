@@ -26,6 +26,9 @@ warn() { echo -e "${YELLOW}[warn]${NC} $1"; }
 
 # ── Pull codice ──────────────────────────────────────────────
 step "Pulling codice da origin/main..."
+git -C "$PROJECT_ROOT" checkout main
+# robots.txt è riscritto ad ogni deploy — non bloccare il pull
+git -C "$PROJECT_ROOT" restore src/public/robots.txt 2>/dev/null || true
 git -C "$PROJECT_ROOT" pull origin main
 
 # ── Build immagine app ───────────────────────────────────────
