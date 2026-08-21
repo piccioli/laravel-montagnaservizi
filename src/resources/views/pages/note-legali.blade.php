@@ -23,7 +23,7 @@
             Società Cooperativa per Azioni<br>
             C.F. / P.IVA: 11790660960<br>
             Codice SDI: M5UXCR1<br>
-            Sede legale: Via Errico Petrella 19, 20124 Milano (MI)<br>
+            Sede legale: Via Decorati al Valor Civile 15, 20138 Milano (MI)<br>
             REA: MI — [da completare]</p>
 
             <h2>Contatti</h2>
