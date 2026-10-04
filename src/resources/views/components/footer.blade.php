@@ -15,6 +15,7 @@
                     </p>
                     <p>
                         <a href="mailto:info@montagnaservizi.com">info@montagnaservizi.com</a><br>
+                        <a href="tel:+390282197148">+39 02 82197148</a><br>
                         <a href="mailto:montagnaserviziscpa@legalmail.it" style="font-size:.8125rem;opacity:.8;">PEC: montagnaserviziscpa@legalmail.it</a>
                     </p>
                 </div>
